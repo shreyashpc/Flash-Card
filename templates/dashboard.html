@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}"/>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div>
+            <div>
+                <h1>Hello {{username}}</h1>
+                <a href="/logout" >Logout</a>
+            </div>            
+            <h2 >Decks</h2>
+            <div>
+                <div>
+                    <div>
+                        <a href="/deck/add"> Add Deck</a>
+                    </div>
+                </div>
+                <div>
+                    <table>
+                        <td>
+                           <a href="/revision"> Revise</a>
+                        </td>
+                    {% for deck in decks %}
+                        <tr>
+                            <th>
+                        <div>
+                            <a href="/view?deck_id={{deck.deck_id}}">{{deck.deck_name}}</a>
+                        </div>
+                            </th>
+                            <td>
+                            <div>
+                                <a href="/deck/edit?deck_id={{deck.deck_id}}">Change Deck Name</a>
+                            </div>
+                                </td>
+                            <td>
+                                <div>
+                                <form action="DELETE">
+                                    <a href="/deck/delete?deck_id={{deck.deck_id}}&&deleteCards=True">Delete Deck</a>
+                                </form>
+                                </div>
+                        </td>
+                            <td>
+                                <a href="/deck/cards?deck_id={{deck.deck_id}}">Add Cards</a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                    </table>
+                </div>
+            </div>
+</body>
+</html>
